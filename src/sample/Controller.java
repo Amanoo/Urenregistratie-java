@@ -1,9 +1,12 @@
 package sample;
 
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Orientation;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.TextAlignment;
@@ -71,11 +74,23 @@ public class Controller  {
         maandButton.setSelected(true);
 
 
-        telepuntTabel.widthProperty().addListener(
-                (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
-                    omschrijvingColumn.setPrefWidth(telepuntTabel.getWidth()-tijdColumn.getWidth()-2);
+
+        ChangeListener<Number> cl = (observable, oldValue, newValue) -> {
+            int i = 0;
+            for (Node n : telepuntTabel.lookupAll(".scroll-bar")) {
+                if (n instanceof ScrollBar) {
+                    ScrollBar bar = (ScrollBar) n;
+                    if (bar.isVisible()) {
+                        i = 16;
+                    }else{
+                        i=0;
+                    }
                 }
-        );
+            }
+            omschrijvingColumn.setPrefWidth(telepuntTabel.getWidth() - tijdColumn.getWidth() - 2 - i);
+        };
+        telepuntTabel.widthProperty().addListener(cl);
+        telepuntTabel.heightProperty().addListener(cl);
 
 
 
@@ -118,8 +133,30 @@ public class Controller  {
 
         TelepuntEntry telepuntEntry = new TelepuntEntry("John", LocalTime.of(11,00));
         TelepuntEntry telepuntEntry2 = new TelepuntEntry("Johgrgggergersgresregresgersgresgresgresgersgersgersgersgresrgern", LocalTime.of(8,03));
+        TelepuntEntry telepuntEntry3 = new TelepuntEntry("Johgrgggergersgresregresgersgresgresgresgersgersgersgersgresrgern", LocalTime.of(8,03));
+        TelepuntEntry telepuntEntry4 = new TelepuntEntry("Johgrgggergersgresregresgersgresgresgresgersgersgersgersgresrgern", LocalTime.of(8,03));
+        TelepuntEntry telepuntEntry5 = new TelepuntEntry("Johgrgggergersgresregresgersgresgresgresgersgersgersgersgresrgern", LocalTime.of(8,03));
+        TelepuntEntry telepuntEntry6 = new TelepuntEntry("Johgrgggergersgresregresgersgresgresgresgersgersgersgersgresrgern", LocalTime.of(8,03));
+        TelepuntEntry telepuntEntry7 = new TelepuntEntry("Johgrgggergersgresregresgersgresgresgresgersgersgersgersgresrgern", LocalTime.of(8,03));
+        TelepuntEntry telepuntEntry8 = new TelepuntEntry("Johgrgggergersgresregresgersgresgresgresgersgersgersgersgresrgern", LocalTime.of(8,03));
+        TelepuntEntry telepuntEntry9 = new TelepuntEntry("Johgrgggergersgresregresgersgresgresgresgersgersgersgersgresrgern", LocalTime.of(8,03));
+        TelepuntEntry telepuntEntry10 = new TelepuntEntry("Johgrgggergersgresregresgersgresgresgresgersgersgersgersgresrgern", LocalTime.of(8,03));
+        TelepuntEntry telepuntEntry11 = new TelepuntEntry("Johgrgggergersgresregresgersgresgresgresgersgersgersgersgresrgern", LocalTime.of(8,03));
+        TelepuntEntry telepuntEntry12 = new TelepuntEntry("Johgrgggergersgresregresgersgresgresgresgersgersgersgersgresrgern", LocalTime.of(8,03));
+        TelepuntEntry telepuntEntry13 = new TelepuntEntry("Johgrgggergersgresregresgersgresgresgresgersgersgersgersgresrgern", LocalTime.of(8,03));
         telepuntTabel.getItems().add(telepuntEntry);
         telepuntTabel.getItems().add(telepuntEntry2);
+        telepuntTabel.getItems().add(telepuntEntry3);
+        telepuntTabel.getItems().add(telepuntEntry4);
+        telepuntTabel.getItems().add(telepuntEntry5);
+        telepuntTabel.getItems().add(telepuntEntry6);
+        telepuntTabel.getItems().add(telepuntEntry7);
+        telepuntTabel.getItems().add(telepuntEntry8);
+        telepuntTabel.getItems().add(telepuntEntry9);
+        telepuntTabel.getItems().add(telepuntEntry10);
+        telepuntTabel.getItems().add(telepuntEntry11);
+        telepuntTabel.getItems().add(telepuntEntry12);
+        telepuntTabel.getItems().add(telepuntEntry13);
 
 
     }
