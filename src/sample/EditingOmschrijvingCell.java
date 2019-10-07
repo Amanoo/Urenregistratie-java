@@ -5,11 +5,11 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-class EditingCell extends TableCell<TelepuntEntry, String> {
+class EditingOmschrijvingCell extends TableCell<TelepuntEntry, String> {
 
       private TextField textField;
 
-      public EditingCell() {}
+      public EditingOmschrijvingCell() {}
 
       @Override
       public void startEdit() {
@@ -56,6 +56,9 @@ class EditingCell extends TableCell<TelepuntEntry, String> {
       private void createTextField() {
           textField = new TextField(getString());
           textField.setMinWidth(this.getWidth() - this.getGraphicTextGap()*2);
+          textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+              if(!textField.isFocused())commitEdit(textField.getText());
+          });
           textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
               @Override

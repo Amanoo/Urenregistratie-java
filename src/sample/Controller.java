@@ -10,6 +10,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.util.Callback;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Controller  {
 
@@ -78,9 +79,11 @@ public class Controller  {
 
 
 
-        Callback<TableColumn, TableCell> cellFactory =
-                p -> new EditingCell();
+        Callback<TableColumn, TableCell> omschrijvingFactory =
+                p -> new EditingOmschrijvingCell();
 
+        Callback<TableColumn, TableCell> timeFactory =
+                p -> new EditingTimeCell();
 
         omschrijvingColumn.setCellValueFactory(
                 new PropertyValueFactory<TelepuntEntry,String>("omschrijving"));
@@ -93,7 +96,7 @@ public class Controller  {
 
 
 
-        omschrijvingColumn.setCellFactory(cellFactory);
+        omschrijvingColumn.setCellFactory(omschrijvingFactory);
         omschrijvingColumn.setOnEditCommit(
                 new EventHandler<TableColumn.CellEditEvent<TelepuntEntry, String>>() {
                     @Override public void handle(TableColumn.CellEditEvent<TelepuntEntry, String> t) {
@@ -103,18 +106,18 @@ public class Controller  {
                 });
 
 
-        tijdColumn.setCellFactory(cellFactory);
+        tijdColumn.setCellFactory(timeFactory);
         tijdColumn.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<TelepuntEntry, String>>() {
-                    @Override public void handle(TableColumn.CellEditEvent<TelepuntEntry, String> t) {
+                new EventHandler<TableColumn.CellEditEvent<TelepuntEntry, LocalTime>>() {
+                    @Override public void handle(TableColumn.CellEditEvent<TelepuntEntry, LocalTime> t) {
                         ((TelepuntEntry)t.getTableView().getItems().get(
                                 t.getTablePosition().getRow())).setTijd(t.getNewValue());
                     }
                 });
 
 
-        TelepuntEntry telepuntEntry = new TelepuntEntry("John", "Doe");
-        TelepuntEntry telepuntEntry2 = new TelepuntEntry("Johgrgggergersgresregresgersgresgresgresgersgersgersgersgresrgern", "Doegrgere");
+        TelepuntEntry telepuntEntry = new TelepuntEntry("John", LocalTime.of(11,00));
+        TelepuntEntry telepuntEntry2 = new TelepuntEntry("Johgrgggergersgresregresgersgresgresgresgersgersgersgersgresrgern", LocalTime.of(8,03));
         telepuntTabel.getItems().add(telepuntEntry);
         telepuntTabel.getItems().add(telepuntEntry2);
 

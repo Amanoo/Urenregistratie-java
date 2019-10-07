@@ -1,10 +1,12 @@
 package sample;
 
+import java.time.LocalTime;
+
 public class TelepuntEntry {
         private String omschrijving;
-        private String tijd;
+        private LocalTime tijd;
 
-        public TelepuntEntry(String omschrijving, String tijd) {
+        public TelepuntEntry(String omschrijving, LocalTime tijd) {
             this.omschrijving = omschrijving;
             this.tijd = tijd;
         }
@@ -13,7 +15,7 @@ public class TelepuntEntry {
             return omschrijving;
         }
 
-        public String getTijd() {
+        public LocalTime getTijd() {
             return tijd;
         }
 
@@ -21,7 +23,7 @@ public class TelepuntEntry {
             this.omschrijving =newValue;
     }
 
-    public void setTijd(String newValue) {
+    public void setTijd(LocalTime newValue) {
             tijd =newValue;
     }
 }
