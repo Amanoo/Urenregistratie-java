@@ -1,19 +1,15 @@
 package sample;
 
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.TextAlignment;
+import javafx.util.Callback;
 
-import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ResourceBundle;
 
 public class Controller  {
 
@@ -76,9 +72,53 @@ public class Controller  {
 
         telepuntTabel.widthProperty().addListener(
                 (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
-                    omschrijvingColumn.setPrefWidth(telepuntTabel.getWidth()-tijdColumn.getWidth());
+                    omschrijvingColumn.setPrefWidth(telepuntTabel.getWidth()-tijdColumn.getWidth()-2);
                 }
         );
+
+
+
+        Callback<TableColumn, TableCell> cellFactory =
+                p -> new EditingCell();
+
+
+        omschrijvingColumn.setCellValueFactory(
+                new PropertyValueFactory<TelepuntEntry,String>("omschrijving"));
+        tijdColumn.setCellValueFactory(
+                new PropertyValueFactory<TelepuntEntry,String>("tijd"));
+
+
+        //omschrijvingColumn.setCellValueFactory(new PropertyValueFactory<>("omschrijving"));
+        //tijdColumn.setCellValueFactory(new PropertyValueFactory<>("tijd"));
+
+
+
+        omschrijvingColumn.setCellFactory(cellFactory);
+        omschrijvingColumn.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<TelepuntEntry, String>>() {
+                    @Override public void handle(TableColumn.CellEditEvent<TelepuntEntry, String> t) {
+                        ((TelepuntEntry)t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())).setOmschrijving(t.getNewValue());
+                    }
+                });
+
+
+        tijdColumn.setCellFactory(cellFactory);
+        tijdColumn.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<TelepuntEntry, String>>() {
+                    @Override public void handle(TableColumn.CellEditEvent<TelepuntEntry, String> t) {
+                        ((TelepuntEntry)t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())).setTijd(t.getNewValue());
+                    }
+                });
+
+
+        TelepuntEntry telepuntEntry = new TelepuntEntry("John", "Doe");
+        TelepuntEntry telepuntEntry2 = new TelepuntEntry("Johgrgggergersgresregresgersgresgresgresgersgersgersgersgresrgern", "Doegrgere");
+        telepuntTabel.getItems().add(telepuntEntry);
+        telepuntTabel.getItems().add(telepuntEntry2);
+
+
     }
 
 
@@ -95,4 +135,16 @@ public class Controller  {
     public void maandButtonPressed(ActionEvent actionEvent) {
         weekButton.setSelected(false);
     }
+
+    public void backButtonPressed(ActionEvent actionEvent) {
+    }
+
+    public void forwardButtonPressed(ActionEvent actionEvent) {
+    }
+
+    public void huidigButtonPressed(ActionEvent actionEvent) {
+    }
+
+
+
 }
