@@ -2,12 +2,10 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.text.TextAlignment;
 
 import java.net.URL;
@@ -17,22 +15,48 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class Controller  {
+
+    //Begintijd input
     @FXML
     TimeSpinner inTime;
+
+    //Stoptijd input
     @FXML
     TimeSpinner outTime;
+
+    //Input voor hoeveelheid pauze
     @FXML
     TimeSpinner pauseTime;
+
+    //Dag van de week die het nu is
     @FXML
     Label dayLabel;
+
+    //Input voor datum
     @FXML
     DatePicker datePicker;
+
+    /****************** Telepunt tabel *********************/
+    //Tabel met telepunt taken
     @FXML
     TableView telepuntTabel;
+    //Tijdkolom in tabel
     @FXML
     TableColumn tijdColumn;
+    //Omschrijving van taak
     @FXML
     TableColumn omschrijvingColumn;
+
+    @FXML
+    Button opslaanButton;
+    /***************** Eind telepunt tabel ****************/
+
+
+    @FXML
+    ToggleButton weekButton;
+    @FXML
+    ToggleButton maandButton;
+
     @FXML
     public void initialize()
     {
@@ -46,7 +70,21 @@ public class Controller  {
         datePicker.setValue(LocalDate.now());
         inTime.getEditor().setText("9:00");
         outTime.getEditor().setText("17:00");
+        maandButton.setSelected(true);
     }
 
 
+    public void annulerenPressed(ActionEvent actionEvent) {
+    }
+
+    public void verwijderPressed(ActionEvent actionEvent) {
+    }
+
+    public void weekButtonPressed(ActionEvent actionEvent) {
+        maandButton.setSelected(false);
+    }
+
+    public void maandButtonPressed(ActionEvent actionEvent) {
+        weekButton.setSelected(false);
+    }
 }

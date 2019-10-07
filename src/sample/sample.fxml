@@ -90,9 +90,9 @@
                         <RowConstraints maxHeight="8.0" minHeight="8.0" prefHeight="8.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="annuleerButton" maxWidth="96.0" minWidth="96.0" mnemonicParsing="false" prefWidth="96.0" text="Annuleren" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button fx:id="annuleerButton" maxWidth="96.0" minWidth="96.0" mnemonicParsing="false" onAction="#annulerenPressed" prefWidth="96.0" text="Annuleren" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Button fx:id="opslaanButton" maxWidth="96.0" minWidth="96.0" mnemonicParsing="false" prefWidth="96.0" text="Toevoegen" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <Button mnemonicParsing="false" text="Verwijderen" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Button mnemonicParsing="false" onAction="#verwijderPressed" text="Verwijderen" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>
@@ -107,12 +107,12 @@
                            </HBox.margin></ListView>
                         <VBox maxWidth="150.0" minWidth="126.0" prefHeight="184.0" prefWidth="126.0">
                            <children>
-                              <ToggleButton fx:id="weekButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="126.0" text="Week">
+                              <ToggleButton fx:id="weekButton" mnemonicParsing="false" onAction="#weekButtonPressed" prefHeight="26.0" prefWidth="126.0" text="Week">
                                  <VBox.margin>
                                     <Insets bottom="4.0" />
                                  </VBox.margin>
                               </ToggleButton>
-                              <ToggleButton fx:id="maandButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="126.0" text="Maand" />
+                              <ToggleButton fx:id="maandButton" mnemonicParsing="false" onAction="#maandButtonPressed" prefHeight="26.0" prefWidth="126.0" text="Maand" />
                               <Label minHeight="8.0" prefHeight="1000000.0" text=" ">
                                  <font>
                                     <Font size="1.0" />
@@ -174,9 +174,9 @@
                               <Label text="iPaddy" GridPane.columnIndex="1" />
                               <Label text="Telepunt" GridPane.columnIndex="4" />
                               <Label text="Totaal" GridPane.columnIndex="6" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                              <TextField GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                              <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField editable="false" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                              <TextField editable="false" GridPane.columnIndex="6" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                      </children>
