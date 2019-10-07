@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -71,6 +72,13 @@ public class Controller  {
         inTime.getEditor().setText("9:00");
         outTime.getEditor().setText("17:00");
         maandButton.setSelected(true);
+
+
+        telepuntTabel.widthProperty().addListener(
+                (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+                    omschrijvingColumn.setPrefWidth(telepuntTabel.getWidth()-tijdColumn.getWidth());
+                }
+        );
     }
 
 
