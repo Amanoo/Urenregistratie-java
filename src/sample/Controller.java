@@ -76,29 +76,14 @@ public class Controller  {
 
 
         ChangeListener<Number> cl = (observable, oldValue, newValue) -> {
-            int i = 0;
-            for (Node n : telepuntTabel.lookupAll(".scroll-bar")) {
-                if (n instanceof ScrollBar) {
-                    ScrollBar bar = (ScrollBar) n;
-                    if (bar.isVisible()) {
-                        i = 16;
-                    }else{
-                        i=0;
-                    }
-                }
-            }
-            omschrijvingColumn.setPrefWidth(telepuntTabel.getWidth() - tijdColumn.getWidth() - 2 - i);
+
+            omschrijvingColumn.setPrefWidth(telepuntTabel.getWidth() - tijdColumn.getWidth() - 18);
         };
         telepuntTabel.widthProperty().addListener(cl);
         telepuntTabel.heightProperty().addListener(cl);
 
 
 
-        Callback<TableColumn, TableCell> omschrijvingFactory =
-                p -> new EditingOmschrijvingCell();
-
-        Callback<TableColumn, TableCell> timeFactory =
-                p -> new EditingTimeCell();
 
         omschrijvingColumn.setCellValueFactory(
                 new PropertyValueFactory<TelepuntEntry,String>("omschrijving"));
@@ -106,29 +91,9 @@ public class Controller  {
                 new PropertyValueFactory<TelepuntEntry,String>("tijd"));
 
 
-        //omschrijvingColumn.setCellValueFactory(new PropertyValueFactory<>("omschrijving"));
-        //tijdColumn.setCellValueFactory(new PropertyValueFactory<>("tijd"));
 
 
 
-        omschrijvingColumn.setCellFactory(omschrijvingFactory);
-        omschrijvingColumn.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<TelepuntEntry, String>>() {
-                    @Override public void handle(TableColumn.CellEditEvent<TelepuntEntry, String> t) {
-                        ((TelepuntEntry)t.getTableView().getItems().get(
-                                t.getTablePosition().getRow())).setOmschrijving(t.getNewValue());
-                    }
-                });
-
-
-        tijdColumn.setCellFactory(timeFactory);
-        tijdColumn.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<TelepuntEntry, LocalTime>>() {
-                    @Override public void handle(TableColumn.CellEditEvent<TelepuntEntry, LocalTime> t) {
-                        ((TelepuntEntry)t.getTableView().getItems().get(
-                                t.getTablePosition().getRow())).setTijd(t.getNewValue());
-                    }
-                });
 
 
         TelepuntEntry telepuntEntry = new TelepuntEntry("John", LocalTime.of(11,00));
